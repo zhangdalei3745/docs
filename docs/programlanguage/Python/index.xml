@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>https://example.com/docs/programlanguage/Python/</link>
+    <link>https://zhangdalei3745.github.io/docs/programlanguage/Python/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://example.com/docs/programlanguage/Python/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="https://zhangdalei3745.github.io/docs/programlanguage/Python/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

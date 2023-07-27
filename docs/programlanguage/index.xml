@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>开发语言 on </title>
-    <link>https://example.com/docs/programlanguage/</link>
+    <link>https://zhangdalei3745.github.io/docs/programlanguage/</link>
     <description>Recent content in 开发语言 on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://example.com/docs/programlanguage/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="https://zhangdalei3745.github.io/docs/programlanguage/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
