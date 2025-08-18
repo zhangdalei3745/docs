@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>个人文档</title><link>http://localhost:1313/docs/program/c++/</link><description>Recent content on 个人文档</description><generator>Hugo</generator><language>en-us</language><atom:link href="http://localhost:1313/docs/program/c++/index.xml" rel="self" type="application/rss+xml"/><item><title>数据类型</title><link>http://localhost:1313/docs/program/c++/variable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/program/c++/variable/</guid><description>&lt;h2 id="c的数据类型">
+ c++的数据类型
+ 
+ &lt;a class="anchor" href="#c%e7%9a%84%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b">#&lt;/a>
+ 
+&lt;/h2></description></item><item><title>编译和构建</title><link>http://localhost:1313/docs/program/c++/builds/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/program/c++/builds/</guid><description>&lt;h2 id="1bazel构建工具介绍和使用">
+ 1.bazel构建工具介绍和使用
+ 
+ &lt;a class="anchor" href="#1bazel%e6%9e%84%e5%bb%ba%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d%e5%92%8c%e4%bd%bf%e7%94%a8">#&lt;/a>
+ 
+&lt;/h2>
+&lt;pre>&lt;code>由 Google 开发的一款构建和测试工具，专为速度和可靠性而设计，能处理任何规模的项目。
+其核心理念是可复现性——也就是说，只要代码相同，任何人、在任何地方构建出来的结果都应该是完全一致的。
+Bazel 是一个基于工件的构建系统。虽然基于任务的构建系统比构建脚本更高级，但它们会让工程师自行定义任务，从而赋予他们过多权力。
+&lt;/code>&lt;/pre>
+&lt;h2 id="2优点">
+ 2.优点
+ 
+ &lt;a class="anchor" href="#2%e4%bc%98%e7%82%b9">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>增量编译&lt;/li>
+&lt;/ul>
+&lt;h2 id="3构建示例">
+ 3.构建示例
+ 
+ &lt;a class="anchor" href="#3%e6%9e%84%e5%bb%ba%e7%a4%ba%e4%be%8b">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>以下是 Bazel 中的 buildfile（通常命名为 BUILD）的示例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>java_binary&lt;span style="color:#f92672">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;MyBinary&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> srcs &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;MyBinary.java&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deps &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;:mylib&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">]&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java_library&lt;span style="color:#f92672">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;mylib&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> srcs &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;MyLibrary.java&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;MyHelper.java&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visibility &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;//java/com/example/myproduct:__subpackages__&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deps &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;//java/com/example/common&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;//java/com/example/myproduct/otherlib&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">]&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 Bazel 中，BUILD 文件用于定义目标，这里的两种目标类型分别为 java_binary 和 java_library。每个目标都对应于系统可以创建的工件：二进制目标会生成可直接执行的二进制文件，而库目标会生成可供二进制文件或其他库使用的库。每个目标都有：&lt;/p>
+&lt;p>name：命令行和其他目标如何引用目标
+srcs：要编译以为目标创建工件的源文件
+deps：必须先于此目标构建并链接到此目标的其他目标&lt;/p></description></item></channel></rss>

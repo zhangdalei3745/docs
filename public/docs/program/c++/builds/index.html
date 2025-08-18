@@ -1,0 +1,78 @@
+<!doctype html><html lang=en-us dir=ltr><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  1.bazel构建工具介绍和使用
+  
+  #
+  
+
+由 Google 开发的一款构建和测试工具，专为速度和可靠性而设计，能处理任何规模的项目。
+其核心理念是可复现性——也就是说，只要代码相同，任何人、在任何地方构建出来的结果都应该是完全一致的。
+Bazel 是一个基于工件的构建系统。虽然基于任务的构建系统比构建脚本更高级，但它们会让工程师自行定义任务，从而赋予他们过多权力。
+
+
+  2.优点
+  
+  #
+  
+
+
+增量编译
+
+
+  3.构建示例
+  
+  #
+  
+
+以下是 Bazel 中的 buildfile（通常命名为 BUILD）的示例：
+java_binary(
+    name = "MyBinary",
+    srcs = ["MyBinary.java"],
+    deps = [
+        ":mylib",
+    ],
+)
+java_library(
+    name = "mylib",
+    srcs = ["MyLibrary.java", "MyHelper.java"],
+    visibility = ["//java/com/example/myproduct:__subpackages__"],
+    deps = [
+        "//java/com/example/common",
+        "//java/com/example/myproduct/otherlib",
+    ],
+)
+在 Bazel 中，BUILD 文件用于定义目标，这里的两种目标类型分别为 java_binary 和 java_library。每个目标都对应于系统可以创建的工件：二进制目标会生成可直接执行的二进制文件，而库目标会生成可供二进制文件或其他库使用的库。每个目标都有：
+name：命令行和其他目标如何引用目标
+srcs：要编译以为目标创建工件的源文件
+deps：必须先于此目标构建并链接到此目标的其他目标'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="http://localhost:1313/docs/program/c++/builds/"><meta property="og:site_name" content="个人文档"><meta property="og:title" content="编译和构建"><meta property="og:description" content='1.bazel构建工具介绍和使用 # 由 Google 开发的一款构建和测试工具，专为速度和可靠性而设计，能处理任何规模的项目。 其核心理念是可复现性——也就是说，只要代码相同，任何人、在任何地方构建出来的结果都应该是完全一致的。 Bazel 是一个基于工件的构建系统。虽然基于任务的构建系统比构建脚本更高级，但它们会让工程师自行定义任务，从而赋予他们过多权力。 2.优点 # 增量编译 3.构建示例 # 以下是 Bazel 中的 buildfile（通常命名为 BUILD）的示例：
+java_binary( name = "MyBinary", srcs = ["MyBinary.java"], deps = [ ":mylib", ], ) java_library( name = "mylib", srcs = ["MyLibrary.java", "MyHelper.java"], visibility = ["//java/com/example/myproduct:__subpackages__"], deps = [ "//java/com/example/common", "//java/com/example/myproduct/otherlib", ], ) 在 Bazel 中，BUILD 文件用于定义目标，这里的两种目标类型分别为 java_binary 和 java_library。每个目标都对应于系统可以创建的工件：二进制目标会生成可直接执行的二进制文件，而库目标会生成可供二进制文件或其他库使用的库。每个目标都有：
+name：命令行和其他目标如何引用目标 srcs：要编译以为目标创建工件的源文件 deps：必须先于此目标构建并链接到此目标的其他目标'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>编译和构建 | 个人文档</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=http://localhost:1313/docs/program/c++/builds/><link rel=stylesheet href=/book.min.ce742184041b67827be505801d71b6b40c09608dfb292033ea54dbbc1d71a174.css integrity="sha256-znQhhAQbZ4J75QWAHXG2tAwJYI37KSAz6lTbvB1xoXQ=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.c29c9aba465086c4be7ce36e94aa1c45082157e97c00adee0e872f7e134def0e.js integrity="sha256-wpyaukZQhsS+fONulKocRQghV+l8AK3uDocvfhNN7w4=" crossorigin=anonymous></script></head><body dir=ltr class="book-kind-page book-type-docs"><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>个人文档</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/docs/example/>Example Site</a><ul><li><a href=/docs/example/table-of-contents/>Table of Contents</a><ul><li><a href=/docs/example/table-of-contents/with-toc/>With ToC</a></li><li><a href=/docs/example/table-of-contents/without-toc/>Without ToC</a></li></ul></li><li><input type=checkbox id=section-dea307ee66bc860af4c94f1f8c27b855 class=toggle>
+<label for=section-dea307ee66bc860af4c94f1f8c27b855 class=flex><a role=button class=flex-auto>Collapsed</a></label><ul><li><a href=/docs/example/collapsed/3rd-level/>3rd Level</a><ul><li><a href=/docs/example/collapsed/3rd-level/4th-level/>4th Level</a></li></ul></li></ul></li></ul></li><li><span>技术</span><ul></ul></li><li><span>编程</span><ul><li><input type=checkbox id=section-2cdacde60fff88735a1085ea126aa92d class=toggle checked>
+<label for=section-2cdacde60fff88735a1085ea126aa92d class=flex><a role=button class=flex-auto>C</a></label><ul><li><a href=/docs/program/c++/variable/>数据类型</a></li><li><a href=/docs/program/c++/builds/ class=active>编译和构建</a></li></ul></li></ul></li><li><span>AI</span><ul></ul></li><li class=book-section-flat><span>Shortcodes</span><ul><li><a href=/docs/shortcodes/badges/>Badges</a></li><li><a href=/docs/shortcodes/buttons/>Buttons</a></li><li><a href=/docs/shortcodes/cards/>Cards</a></li><li><a href=/docs/shortcodes/columns/>Columns</a></li><li><a href=/docs/shortcodes/details/>Details</a></li><li><a href=/docs/shortcodes/hints/>Hints</a></li><li><a href=/docs/shortcodes/mermaid/>Mermaid</a></li><li><a href=/docs/shortcodes/steps/>Steps</a></li><li><a href=/docs/shortcodes/tabs/>Tabs</a></li><li><a href=/docs/shortcodes/katex/>KaTeX</a></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>编译和构建</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#1bazel构建工具介绍和使用>1.bazel构建工具介绍和使用</a></li><li><a href=#2优点>2.优点</a></li><li><a href=#3构建示例>3.构建示例</a></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=1bazel构建工具介绍和使用>1.bazel构建工具介绍和使用
+<a class=anchor href=#1bazel%e6%9e%84%e5%bb%ba%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d%e5%92%8c%e4%bd%bf%e7%94%a8>#</a></h2><pre><code>由 Google 开发的一款构建和测试工具，专为速度和可靠性而设计，能处理任何规模的项目。
+其核心理念是可复现性——也就是说，只要代码相同，任何人、在任何地方构建出来的结果都应该是完全一致的。
+Bazel 是一个基于工件的构建系统。虽然基于任务的构建系统比构建脚本更高级，但它们会让工程师自行定义任务，从而赋予他们过多权力。
+</code></pre><h2 id=2优点>2.优点
+<a class=anchor href=#2%e4%bc%98%e7%82%b9>#</a></h2><ul><li>增量编译</li></ul><h2 id=3构建示例>3.构建示例
+<a class=anchor href=#3%e6%9e%84%e5%bb%ba%e7%a4%ba%e4%be%8b>#</a></h2><p>以下是 Bazel 中的 buildfile（通常命名为 BUILD）的示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>java_binary<span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>    name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;MyBinary&#34;</span>,
+</span></span><span style=display:flex><span>    srcs <span style=color:#f92672>=</span> <span style=color:#f92672>[</span><span style=color:#e6db74>&#34;MyBinary.java&#34;</span><span style=color:#f92672>]</span>,
+</span></span><span style=display:flex><span>    deps <span style=color:#f92672>=</span> <span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;:mylib&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>]</span>,
+</span></span><span style=display:flex><span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>java_library<span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>    name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;mylib&#34;</span>,
+</span></span><span style=display:flex><span>    srcs <span style=color:#f92672>=</span> <span style=color:#f92672>[</span><span style=color:#e6db74>&#34;MyLibrary.java&#34;</span>, <span style=color:#e6db74>&#34;MyHelper.java&#34;</span><span style=color:#f92672>]</span>,
+</span></span><span style=display:flex><span>    visibility <span style=color:#f92672>=</span> <span style=color:#f92672>[</span><span style=color:#e6db74>&#34;//java/com/example/myproduct:__subpackages__&#34;</span><span style=color:#f92672>]</span>,
+</span></span><span style=display:flex><span>    deps <span style=color:#f92672>=</span> <span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;//java/com/example/common&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;//java/com/example/myproduct/otherlib&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>]</span>,
+</span></span><span style=display:flex><span><span style=color:#f92672>)</span>
+</span></span></code></pre></div><p>在 Bazel 中，BUILD 文件用于定义目标，这里的两种目标类型分别为 java_binary 和 java_library。每个目标都对应于系统可以创建的工件：二进制目标会生成可直接执行的二进制文件，而库目标会生成可供二进制文件或其他库使用的库。每个目标都有：</p><p>name：命令行和其他目标如何引用目标
+srcs：要编译以为目标创建工件的源文件
+deps：必须先于此目标构建并链接到此目标的其他目标</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><div class="flex flex-wrap justify-between"><span><a href=/docs/program/c++/variable/ class="flex align-center book-icon"><img src=/svg/backward.svg class=book-icon alt=Previous title=数据类型>
+<span>数据类型</span>
+</a></span><span><a href=/docs/shortcodes/badges/ class="flex align-center book-icon"><span>Badges</span>
+<img src=/svg/forward.svg class=book-icon alt=Next title=Badges></a></span></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1bazel构建工具介绍和使用>1.bazel构建工具介绍和使用</a></li><li><a href=#2优点>2.优点</a></li><li><a href=#3构建示例>3.构建示例</a></li></ul></nav></div></aside></main></body></html>

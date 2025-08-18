@@ -1,0 +1,13 @@
+baseURL = 'https://docs.fenli.com/'
+languageCode = 'en-us'
+title = '个人文档'
+
+[module]
+[[module.imports]]
+path = 'github.com/alex-shpak/hugo-book'
+
+[menu]
+[[menu.home]]
+  name = "文档"
+  pageref = "docs/example"
+  weight = 1
