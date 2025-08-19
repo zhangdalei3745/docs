@@ -1,0 +1,42 @@
+{{- $title := .Get "title" -}}
+{{- $value := .Get "value" -}}
+{{- $style := .Get "style" | default "default" -}}
+
+<span class="badge-shortcode">
+  {{- if and $title $value -}}
+    <span class="badge-title badge-part">{{ $title }}</span><span class="badge-value badge-part badge-{{ $style }}">{{ $value }}</span>
+  {{- else if $title -}}
+    <span class="badge-single-part badge-part badge-{{ if ne $style "default" }}{{ $style }}{{ else }}info{{ end }}">{{ $title }}</span>
+  {{- else if $value -}}
+    <span class="badge-single-part badge-part badge-{{ if ne $style "default" }}{{ $style }}{{ else }}info{{ end }}">{{ $value }}</span>
+  {{- end -}}
+</span>
+
+<style>
+.badge-shortcode {
+  display: inline-flex;
+  border-radius: .25rem;
+  overflow: hidden;
+  font-size: .75em;
+  line-height: 1.5;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.badge-part {
+  padding: 0.25em 0.4em;
+  font-weight: 600;
+}
+.badge-title {
+  background-color: #555;
+  color: #fff;
+}
+.badge-value, .badge-single-part {
+  color: #fff;
+}
+.badge-default { background-color: #8a8a8a; }
+.badge-info { background-color: #0d6efd; }
+.badge-success { background-color: #198754; }
+.badge-warning { background-color: #ffc107; color: #000; }
+.badge-danger { background-color: #dc3545; }
+</style>
